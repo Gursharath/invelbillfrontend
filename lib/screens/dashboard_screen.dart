@@ -11,7 +11,7 @@ class DashboardScreen extends StatelessWidget {
       backgroundColor: const Color(0xFF1E1E1E),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 66, 66, 69),
-        title: const Text("Dashboard"),
+        title: const Text("Dashboard."),
         elevation: 0,
       ),
       drawer: const AppDrawer(),

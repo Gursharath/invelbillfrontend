@@ -67,4 +67,15 @@ class ProductService {
       return false;
     }
   }
+
+  static Future<int> getProductCount() async {
+    final response = await ApiService.get(
+        '${ApiConstants.baseUrl}/product/count',
+        withAuth: true);
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return data['total'];
+    }
+    return 0;
+  }
 }

@@ -9,23 +9,44 @@ class StockProvider with ChangeNotifier {
   List<StockLog> get logs => _logs;
   bool get isLoading => _loading;
 
+  /// Fetch all stock logs
   Future<void> fetchLogs() async {
-    _loading = true;
-    notifyListeners();
-    _logs = await StockService.fetchStockLogs();
-    _loading = false;
-    notifyListeners();
+    try {
+      _loading = true;
+      notifyListeners();
+
+      final fetchedLogs = await StockService.fetchStockLogs();
+      _logs = fetchedLogs;
+    } catch (e) {
+      debugPrint('Error fetching stock logs: $e');
+      _logs = [];
+    } finally {
+      _loading = false;
+      notifyListeners();
+    }
   }
 
+  /// Stock In action
   Future<bool> stockIn(int productId, int quantity) async {
-    final result = await StockService.stockIn(productId, quantity);
-    if (result) await fetchLogs();
-    return result;
+    try {
+      final result = await StockService.stockIn(productId, quantity);
+      if (result) await fetchLogs();
+      return result;
+    } catch (e) {
+      debugPrint('Stock In error: $e');
+      return false;
+    }
   }
 
+  /// Stock Out action
   Future<bool> stockOut(int productId, int quantity) async {
-    final result = await StockService.stockOut(productId, quantity);
-    if (result) await fetchLogs();
-    return result;
+    try {
+      final result = await StockService.stockOut(productId, quantity);
+      if (result) await fetchLogs();
+      return result;
+    } catch (e) {
+      debugPrint('Stock Out error: $e');
+      return false;
+    }
   }
 }
