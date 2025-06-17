@@ -12,6 +12,8 @@ import '../screens/invoice_pdf_preview_screen.dart';
 import '../screens/invoice_history_screen.dart';
 import '../screens/admin_user_management_screen.dart';
 import '../screens/gemini_chat_screen.dart';
+import '../screens/scan_product_detail_screen.dart';
+import '../screens/snake_game_screen.dart';
 
 class AppRoutes {
   static const login = '/';
@@ -26,6 +28,8 @@ class AppRoutes {
   static const invoiceHistory = '/invoice-history';
   static const adminUserManagement = '/admin-user-management';
   static const geminiChat = '/gemini-chat';
+  static const scanProductDetail = '/scan-product-detail';
+  static const snakeGame = '/snake-game';
 
   static Map<String, WidgetBuilder> getRoutes() {
     return {
@@ -41,6 +45,8 @@ class AppRoutes {
       invoiceHistory: (context) => const InvoiceHistoryScreen(),
       adminUserManagement: (context) => const AdminUserManagementScreen(),
       geminiChat: (context) => const GeminiChatScreen(),
+      scanProductDetail: (context) => const ScanProductDetailScreen(),
+      snakeGame: (context) => const SnakeGameScreen(),
     };
   }
 }

@@ -40,6 +40,8 @@ class AppDrawer extends StatelessWidget {
               context, Icons.add_box, 'Add Product', AppRoutes.addProduct),
           _buildTile(context, Icons.document_scanner, 'Scan Product',
               AppRoutes.scanProduct),
+          _buildTile(context, Icons.search, 'Scanned Product Detail',
+              AppRoutes.scanProductDetail),
           _buildTile(
               context, Icons.list_alt, 'View Products', AppRoutes.productList),
           _buildTile(context, Icons.inventory, 'Stock Management',
@@ -50,6 +52,8 @@ class AppDrawer extends StatelessWidget {
               AppRoutes.invoiceHistory),
           _buildTile(
               context, Icons.chat, 'Chat Assistant', AppRoutes.geminiChat),
+          _buildTile(context, Icons.videogame_asset, 'Snake Game',
+              AppRoutes.snakeGame),
           const Spacer(),
           const Divider(color: Colors.white24),
           _buildTile(

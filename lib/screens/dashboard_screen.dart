@@ -56,7 +56,7 @@ class DashboardScreen extends StatelessWidget {
                 _ActionButton(
                   icon: Icons.qr_code_scanner,
                   label: "Scan Product",
-                  route: AppRoutes.scanProduct,
+                  route: AppRoutes.scanProductDetail,
                   color: Color(0xFF48C9B0),
                 ),
                 _ActionButton(

@@ -10,6 +10,7 @@ import '../models/product.dart';
 
 class CreateInvoiceScreen extends StatefulWidget {
   const CreateInvoiceScreen({super.key});
+
   @override
   State<CreateInvoiceScreen> createState() => _CreateInvoiceScreenState();
 }
@@ -92,6 +93,36 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
 
     return Scaffold(
       appBar: AppBar(title: const Text("Create Invoice")),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.qr_code_scanner),
+        label: const Text("Scan"),
+        onPressed: () async {
+          final barcode = await Navigator.pushNamed(context, '/scan-product');
+          if (barcode is String) {
+            final product = productProvider.products.firstWhere(
+              (p) => p.barcode == barcode,
+              orElse: () => Product(
+                id: -1,
+                name: '',
+                barcode: '',
+                price: 0,
+                quantity: 0,
+              ),
+            );
+
+            if (product.id != -1) {
+              setState(() {
+                _selectedProducts.update(product, (qty) => qty + 1,
+                    ifAbsent: () => 1);
+              });
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Product not found")),
+              );
+            }
+          }
+        },
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: productProvider.isLoading
