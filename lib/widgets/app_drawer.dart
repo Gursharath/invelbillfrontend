@@ -38,8 +38,6 @@ class AppDrawer extends StatelessWidget {
               context, Icons.dashboard, 'Dashboard', AppRoutes.dashboard),
           _buildTile(
               context, Icons.add_box, 'Add Product', AppRoutes.addProduct),
-          _buildTile(context, Icons.document_scanner, 'Scan Product',
-              AppRoutes.scanProduct),
           _buildTile(context, Icons.search, 'Scanned Product Detail',
               AppRoutes.scanProductDetail),
           _buildTile(

@@ -21,6 +21,8 @@ dependencies:
   image_picker: ^1.1.1
   flutter_native_splash: ^2.3.5
   flame: ^1.16.0
+  excel: ^2.1.0
+  share_plus: ^7.2.1
   
 
 dev_dependencies:
@@ -49,3 +51,4 @@ flutter:
     - assets/images/logo.png
     - assets/icon/app_icon.png
     - assets/splash/splash_logo.png
+    - assets/images/login_bg.jpg
