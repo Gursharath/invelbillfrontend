@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:invenbill/models/product.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../providers/product_provider.dart';
 import '../providers/stock_provider.dart';
@@ -18,7 +19,6 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
   final _quantity = TextEditingController();
 
   @override
-  @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -26,17 +26,17 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
       final stockProvider = context.read<StockProvider>();
 
       if (productProvider.products.isEmpty) {
-        await productProvider.fetchProducts(); // Make sure products are loaded
+        await productProvider.fetchProducts();
       }
 
-      await stockProvider.fetchLogs(); // Then fetch logs
+      await stockProvider.fetchLogs();
     });
   }
 
   void _showSnack(String message, [Color? color]) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(message),
+        content: Text(message, style: GoogleFonts.orbitron()),
         backgroundColor: color ?? Colors.black,
         behavior: SnackBarBehavior.floating,
       ),
@@ -49,32 +49,50 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
     final stockProvider = context.watch<StockProvider>();
 
     return Scaffold(
+      backgroundColor: const Color(0xFF1E1E1E),
       appBar: AppBar(
-        title: const Text("Stock Management"),
+        title: Text(
+          "Stock Management",
+          style: GoogleFonts.orbitron(
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            color: Colors.tealAccent,
+          ),
+        ),
         centerTitle: true,
+        backgroundColor: const Color(0xFF2A2A2A),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             Card(
+              color: const Color(0xFF2C2C2E),
               elevation: 4,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12)),
+                borderRadius: BorderRadius.circular(12),
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
                     DropdownButtonFormField<int>(
-                      decoration: const InputDecoration(
+                      dropdownColor: const Color(0xFF2C2C2E),
+                      decoration: InputDecoration(
                         labelText: "Select Product",
-                        prefixIcon: Icon(Icons.shopping_bag),
-                        border: OutlineInputBorder(),
+                        labelStyle: GoogleFonts.orbitron(color: Colors.white),
+                        prefixIcon: const Icon(Icons.shopping_bag),
+                        border: const OutlineInputBorder(),
                       ),
                       value: selectedProductId,
                       items: productProvider.products.map((p) {
                         return DropdownMenuItem(
-                            value: p.id, child: Text(p.name));
+                          value: p.id,
+                          child: Text(
+                            p.name,
+                            style: GoogleFonts.orbitron(fontSize: 13),
+                          ),
+                        );
                       }).toList(),
                       onChanged: (val) =>
                           setState(() => selectedProductId = val),
@@ -83,10 +101,12 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
                     TextFormField(
                       controller: _quantity,
                       keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
+                      style: GoogleFonts.orbitron(color: Colors.white),
+                      decoration: InputDecoration(
                         labelText: "Quantity",
-                        prefixIcon: Icon(Icons.confirmation_number),
-                        border: OutlineInputBorder(),
+                        labelStyle: GoogleFonts.orbitron(color: Colors.white),
+                        prefixIcon: const Icon(Icons.confirmation_number),
+                        border: const OutlineInputBorder(),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -95,9 +115,15 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
                         Expanded(
                           child: ElevatedButton.icon(
                             icon: const Icon(Icons.arrow_downward),
-                            label: const Text("Stock In"),
+                            label: Text(
+                              "Stock In",
+                              style: GoogleFonts.orbitron(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
+                              padding: const EdgeInsets.symmetric(vertical: 12),
                             ),
                             onPressed: selectedProductId == null
                                 ? null
@@ -125,9 +151,15 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
                         Expanded(
                           child: ElevatedButton.icon(
                             icon: const Icon(Icons.arrow_upward),
-                            label: const Text("Stock Out"),
+                            label: Text(
+                              "Stock Out",
+                              style: GoogleFonts.orbitron(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red,
+                              padding: const EdgeInsets.symmetric(vertical: 12),
                             ),
                             onPressed: selectedProductId == null
                                 ? null
@@ -159,11 +191,15 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            const Align(
+            Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 "Stock Logs",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: GoogleFonts.orbitron(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
               ),
             ),
             const SizedBox(height: 10),
@@ -171,7 +207,15 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
               child: stockProvider.isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : stockProvider.logs.isEmpty
-                      ? const Center(child: Text("No logs available"))
+                      ? Center(
+                          child: Text(
+                            "No logs available",
+                            style: GoogleFonts.orbitron(
+                              fontSize: 14,
+                              color: Colors.white70,
+                            ),
+                          ),
+                        )
                       : ListView.separated(
                           itemCount: stockProvider.logs.length,
                           separatorBuilder: (context, index) =>
@@ -194,6 +238,7 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
                                     .format(log.date);
 
                             return Card(
+                              color: const Color(0xFF2C2C2E),
                               elevation: 2,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -207,12 +252,27 @@ class _StockManagementScreenState extends State<StockManagementScreen> {
                                       ? Colors.green
                                       : Colors.red,
                                 ),
-                                title: Text(product.name),
+                                title: Text(
+                                  product.name,
+                                  style: GoogleFonts.orbitron(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
+                                  ),
+                                ),
                                 subtitle: Text(
-                                    "Action: ${log.action.toUpperCase()} | Qty: ${log.quantity}"),
+                                  "Action: ${log.action.toUpperCase()} | Qty: ${log.quantity}",
+                                  style: GoogleFonts.orbitron(
+                                    fontSize: 12,
+                                    color: Colors.white70,
+                                  ),
+                                ),
                                 trailing: Text(
                                   formattedDate,
-                                  style: const TextStyle(fontSize: 12),
+                                  style: GoogleFonts.orbitron(
+                                    fontSize: 11,
+                                    color: Colors.white60,
+                                  ),
                                 ),
                               ),
                             );

@@ -42,24 +42,25 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
         padding: const EdgeInsets.all(14),
         constraints: const BoxConstraints(maxWidth: 300),
         decoration: BoxDecoration(
-          color: isUser ? Colors.teal : Colors.grey[850],
+          color: isUser ? Colors.tealAccent.withOpacity(0.2) : Colors.black87,
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(16),
             topRight: const Radius.circular(16),
             bottomLeft: Radius.circular(isUser ? 16 : 0),
             bottomRight: Radius.circular(isUser ? 0 : 16),
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 6,
-              offset: const Offset(0, 2),
-            ),
-          ],
+          border: Border.all(
+            color: isUser ? Colors.tealAccent : Colors.white30,
+            width: 1.2,
+          ),
         ),
         child: Text(
           text,
-          style: const TextStyle(color: Colors.white, fontSize: 16),
+          style: const TextStyle(
+            fontFamily: 'Orbitron',
+            fontSize: 15,
+            color: Colors.white,
+          ),
         ),
       ),
     );
@@ -70,9 +71,19 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('Chat Assistant'),
-        backgroundColor: Colors.teal,
+        title: const Text(
+          'Chat Assistant',
+          style: TextStyle(
+            fontFamily: 'Orbitron',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.tealAccent,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.black,
         elevation: 4,
+        shadowColor: Colors.tealAccent,
       ),
       body: SafeArea(
         child: Column(
@@ -90,7 +101,7 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
             if (_loading)
               const Padding(
                 padding: EdgeInsets.all(8.0),
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(color: Colors.tealAccent),
               ),
             Padding(
               padding: const EdgeInsets.all(12),
@@ -99,10 +110,16 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
                   Expanded(
                     child: TextField(
                       controller: _controller,
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Orbitron',
+                      ),
                       decoration: InputDecoration(
                         hintText: 'Type your message...',
-                        hintStyle: const TextStyle(color: Colors.white70),
+                        hintStyle: const TextStyle(
+                          color: Colors.white70,
+                          fontFamily: 'Orbitron',
+                        ),
                         filled: true,
                         fillColor: Colors.grey[900],
                         border: OutlineInputBorder(
@@ -119,11 +136,18 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
                     onTap: _loading ? null : _sendMessage,
                     child: Container(
                       padding: const EdgeInsets.all(14),
-                      decoration: const BoxDecoration(
-                        color: Colors.teal,
+                      decoration: BoxDecoration(
+                        color: Colors.tealAccent,
                         shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.tealAccent.withOpacity(0.4),
+                            blurRadius: 10,
+                            spreadRadius: 2,
+                          ),
+                        ],
                       ),
-                      child: const Icon(Icons.send, color: Colors.white),
+                      child: const Icon(Icons.send, color: Colors.black),
                     ),
                   ),
                 ],

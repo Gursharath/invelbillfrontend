@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:invenbill/screens/gemini_chat_screen.dart';
 import '../screens/login_screen.dart';
 import '../screens/register_screen.dart';
 import '../screens/dashboard_screen.dart';

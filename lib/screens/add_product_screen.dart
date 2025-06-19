@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import '../models/product.dart';
 import '../providers/product_provider.dart';
 import '../widgets/custom_text_field.dart';
@@ -26,7 +28,20 @@ class _AddProductScreenState extends State<AddProductScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Add Product")),
+      backgroundColor: const Color(0xFF1E1E1E),
+      appBar: AppBar(
+        title: Text(
+          "Add Product",
+          style: GoogleFonts.orbitron(
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            color: Colors.tealAccent,
+            letterSpacing: 1.2,
+          ),
+        ),
+        backgroundColor: const Color(0xFF2A2A2A),
+        elevation: 0,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Form(
@@ -35,11 +50,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
             children: [
               Text(
                 "Product Details",
-                style: theme.textTheme.headlineSmall?.copyWith(
+                style: GoogleFonts.orbitron(
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
+                  letterSpacing: 1.0,
                 ),
               ),
+              const SizedBox(height: 16),
 
               // Product Name
               CustomTextField(
@@ -61,7 +79,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   ),
                   const SizedBox(width: 10),
                   IconButton(
-                    icon: const Icon(Icons.qr_code_scanner, size: 30),
+                    icon: const Icon(Icons.qr_code_scanner,
+                        size: 30, color: Colors.tealAccent),
                     tooltip: "Scan Barcode",
                     onPressed: () async {
                       final code =
@@ -95,20 +114,32 @@ class _AddProductScreenState extends State<AddProductScreen> {
               if (_error != null)
                 Text(
                   _error!,
-                  style: const TextStyle(color: Colors.red),
+                  style: GoogleFonts.orbitron(
+                    color: Colors.redAccent,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 13,
+                    letterSpacing: 0.8,
+                  ),
                   textAlign: TextAlign.center,
                 ),
 
-              // Submit Button
               const SizedBox(height: 16),
+
+              // Submit Button
               _loading
                   ? const Center(child: CircularProgressIndicator())
                   : ElevatedButton.icon(
                       icon: const Icon(Icons.save),
-                      label: const Text("Save Product"),
+                      label: Text(
+                        "Save Product",
+                        style: GoogleFonts.orbitron(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1.0,
+                        ),
+                      ),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 14),
-                        textStyle: const TextStyle(fontSize: 16),
                         backgroundColor: theme.primaryColor,
                       ),
                       onPressed: () async {

@@ -5,6 +5,7 @@ import '../providers/product_provider.dart';
 import '../widgets/product_tile.dart';
 import '../models/product.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:google_fonts/google_fonts.dart';
 
 class ProductListScreen extends StatefulWidget {
   const ProductListScreen({super.key});
@@ -94,7 +95,15 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("All Products"),
+        title: Text(
+          "All Products",
+          style: GoogleFonts.orbitron(
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            color: Colors.tealAccent,
+            letterSpacing: 1.1,
+          ),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.picture_as_pdf),
@@ -116,9 +125,17 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: TextField(
+                      style: GoogleFonts.orbitron(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
                       decoration: InputDecoration(
                         hintText: "Search by name or barcode...",
-                        prefixIcon: const Icon(Icons.search),
+                        hintStyle: GoogleFonts.orbitron(color: Colors.white60),
+                        prefixIcon:
+                            const Icon(Icons.search, color: Colors.tealAccent),
+                        filled: true,
+                        fillColor: const Color(0xFF2C2C2E),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -250,13 +267,21 @@ class _ProductListScreenState extends State<ProductListScreen> {
       children: [
         Text(
           value,
-          style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: color),
+          style: GoogleFonts.orbitron(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: color,
+            letterSpacing: 0.8,
+          ),
         ),
         const SizedBox(height: 4),
         Text(
           label,
-          style: const TextStyle(fontSize: 14, color: Colors.white70),
+          style: GoogleFonts.orbitron(
+            fontSize: 12,
+            color: Colors.white70,
+            letterSpacing: 0.5,
+          ),
         ),
       ],
     );

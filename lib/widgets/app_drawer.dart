@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../constants/app_routes.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -12,23 +13,60 @@ class AppDrawer extends StatelessWidget {
         children: [
           DrawerHeader(
             decoration: const BoxDecoration(
-              color: Color(0xFF2A2A2A),
+              gradient: LinearGradient(
+                colors: [Color(0xFF2A2A2A), Color(0xFF1E1E1E)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircleAvatar(
-                  backgroundColor: Colors.grey[800],
-                  radius: 32,
-                  child: Image.asset('assets/images/logo.png', height: 40),
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: const LinearGradient(
+                      colors: [Colors.tealAccent, Colors.cyan],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.tealAccent.withOpacity(0.6),
+                        blurRadius: 12,
+                        spreadRadius: 2,
+                      ),
+                    ],
+                  ),
+                  padding: const EdgeInsets.all(4),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.black,
+                    radius: 34,
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/images/logo.png',
+                        height: 64,
+                        width: 64,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 12),
-                const Text(
+                Text(
                   'InvenBill',
-                  style: TextStyle(
+                  style: GoogleFonts.orbitron(
                     fontSize: 22,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.tealAccent,
+                    letterSpacing: 1.2,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 8,
+                        color: Colors.tealAccent.withOpacity(0.7),
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -75,13 +113,26 @@ class AppDrawer extends StatelessWidget {
     bool isLogout = false,
   }) {
     return ListTile(
-      leading:
-          Icon(icon, color: isLogout ? Colors.redAccent : Colors.tealAccent),
+      leading: Icon(
+        icon,
+        color: isLogout ? Colors.redAccent : Colors.tealAccent,
+      ),
       title: Text(
         title,
-        style: TextStyle(
+        style: GoogleFonts.orbitron(
+          fontSize: 15,
+          fontWeight: FontWeight.w600,
           color: isLogout ? Colors.redAccent : Colors.white,
-          fontSize: 16,
+          letterSpacing: 1.0,
+          shadows: isLogout
+              ? []
+              : [
+                  Shadow(
+                    blurRadius: 4,
+                    color: Colors.tealAccent.withOpacity(0.5),
+                    offset: const Offset(0, 1),
+                  ),
+                ],
         ),
       ),
       onTap: () {

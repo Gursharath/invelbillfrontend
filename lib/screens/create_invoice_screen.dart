@@ -3,6 +3,7 @@ import 'package:pdf/pdf.dart';
 import 'package:provider/provider.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../providers/product_provider.dart';
 import '../providers/invoice_provider.dart';
@@ -92,10 +93,19 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
     calculateTotals();
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Create Invoice")),
+      backgroundColor: const Color(0xFF1E1E1E),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF2A2A2A),
+        title: Text("Create Invoice",
+            style: GoogleFonts.orbitron(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Colors.tealAccent,
+            )),
+      ),
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.qr_code_scanner),
-        label: const Text("Scan"),
+        label: Text("Scan", style: GoogleFonts.orbitron()),
         onPressed: () async {
           final barcode = await Navigator.pushNamed(context, '/scan-product');
           if (barcode is String) {
@@ -117,7 +127,10 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
               });
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Product not found")),
+                SnackBar(
+                  content:
+                      Text("Product not found", style: GoogleFonts.orbitron()),
+                ),
               );
             }
           }
@@ -131,8 +144,10 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
                 children: [
                   TextField(
                     controller: _customerName,
+                    style: GoogleFonts.orbitron(color: Colors.white),
                     decoration: InputDecoration(
                       labelText: "Customer Name (optional)",
+                      labelStyle: GoogleFonts.orbitron(),
                       prefixIcon: const Icon(Icons.person),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -140,14 +155,18 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const Text("Select Products",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  Text("Select Products",
+                      style: GoogleFonts.orbitron(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      )),
                   const SizedBox(height: 10),
                   ...productProvider.products.map((product) {
                     final quantity = _selectedProducts[product] ?? 0;
 
                     return Card(
+                      color: const Color(0xFF2C2C2E),
                       elevation: 2,
                       margin: const EdgeInsets.symmetric(vertical: 8),
                       shape: RoundedRectangleBorder(
@@ -158,9 +177,14 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
                           children: [
                             Expanded(
                               child: ListTile(
-                                title: Text(product.name),
+                                title: Text(product.name,
+                                    style: GoogleFonts.orbitron(
+                                        color: Colors.white)),
                                 subtitle: Text(
-                                    "₹${product.price.toStringAsFixed(2)}"),
+                                  "₹${product.price.toStringAsFixed(2)}",
+                                  style: GoogleFonts.orbitron(
+                                      color: Colors.white70),
+                                ),
                                 contentPadding: EdgeInsets.zero,
                               ),
                             ),
@@ -170,8 +194,13 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
                                 initialValue:
                                     quantity == 0 ? '' : quantity.toString(),
                                 keyboardType: TextInputType.number,
-                                decoration: const InputDecoration(
+                                style: GoogleFonts.orbitron(
+                                    fontSize: 14, color: Colors.white),
+                                decoration: InputDecoration(
                                   labelText: "Qty",
+                                  labelStyle: GoogleFonts.orbitron(
+                                      fontSize: 12, color: Colors.white70),
+                                  isDense: true,
                                 ),
                                 onChanged: (val) {
                                   final qty = int.tryParse(val) ?? 0;
@@ -192,7 +221,7 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
                   }),
                   const SizedBox(height: 20),
                   Card(
-                    color: const Color.fromARGB(255, 22, 22, 22),
+                    color: const Color(0xFF2C2C2E),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -201,12 +230,18 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text("Subtotal: ₹${subtotal.toStringAsFixed(2)}"),
-                          Text("Tax (18%): ₹${tax.toStringAsFixed(2)}"),
+                          Text("Subtotal: ₹${subtotal.toStringAsFixed(2)}",
+                              style: GoogleFonts.orbitron(
+                                  color: Colors.white, fontSize: 14)),
+                          Text("Tax (18%): ₹${tax.toStringAsFixed(2)}",
+                              style: GoogleFonts.orbitron(
+                                  color: Colors.white, fontSize: 14)),
                           const SizedBox(height: 6),
                           Text("Total: ₹${total.toStringAsFixed(2)}",
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 26)),
+                              style: GoogleFonts.orbitron(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24,
+                                  color: Colors.tealAccent)),
                         ],
                       ),
                     ),
@@ -241,8 +276,8 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
                                   _customerName.text, _selectedProducts);
                             }
                           },
-                    label: const Text("Generate & Print Invoice",
-                        style: TextStyle(fontSize: 16)),
+                    label: Text("Generate & Print Invoice",
+                        style: GoogleFonts.orbitron(fontSize: 16)),
                   ),
                 ],
               ),

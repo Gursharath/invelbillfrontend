@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../widgets/app_drawer.dart';
 import '../constants/app_routes.dart';
 
@@ -11,7 +12,15 @@ class DashboardScreen extends StatelessWidget {
       backgroundColor: const Color(0xFF1E1E1E),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 66, 66, 69),
-        title: const Text("Dashboard."),
+        title: Text(
+          "Dashboard.",
+          style: GoogleFonts.orbitron(
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            color: Colors.tealAccent,
+            letterSpacing: 1.2,
+          ),
+        ),
         elevation: 0,
       ),
       drawer: const AppDrawer(),
@@ -106,16 +115,22 @@ class _OverviewCard extends StatelessWidget {
           children: [
             Text(
               value,
-              style: TextStyle(
+              style: GoogleFonts.orbitron(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: color,
+                letterSpacing: 1.0,
               ),
             ),
             const SizedBox(height: 6),
             Text(
               title,
-              style: const TextStyle(fontSize: 12, color: Colors.white70),
+              style: GoogleFonts.orbitron(
+                fontSize: 11,
+                fontWeight: FontWeight.w500,
+                color: Colors.white70,
+                letterSpacing: 0.5,
+              ),
               textAlign: TextAlign.center,
             ),
           ],
@@ -155,7 +170,12 @@ class _ActionButton extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 label,
-                style: const TextStyle(fontSize: 14, color: Colors.white),
+                style: GoogleFonts.orbitron(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                  letterSpacing: 0.8,
+                ),
               ),
             ],
           ),

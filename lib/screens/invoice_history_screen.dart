@@ -8,6 +8,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../models/invoice.dart';
 import '../providers/invoice_provider.dart';
@@ -125,7 +126,12 @@ class _InvoiceHistoryScreenState extends State<InvoiceHistoryScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Invoice History"),
+        title: Text("Invoice History",
+            style: GoogleFonts.orbitron(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Colors.tealAccent,
+            )),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -151,12 +157,13 @@ class _InvoiceHistoryScreenState extends State<InvoiceHistoryScreen> {
               children: [
                 Expanded(
                   child: TextField(
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       hintText: 'Search by name or invoice #',
-                      prefixIcon: Icon(Icons.search),
+                      prefixIcon: const Icon(Icons.search),
                       border: OutlineInputBorder(),
                       isDense: true,
                     ),
+                    style: GoogleFonts.poppins(),
                     onChanged: (value) => setState(() => _searchQuery = value),
                   ),
                 ),
@@ -186,7 +193,7 @@ class _InvoiceHistoryScreenState extends State<InvoiceHistoryScreen> {
               padding: const EdgeInsets.only(top: 8),
               child: Text(
                 'Range: ${_selectedRange!.start.toLocal().toString().split(' ')[0]} to ${_selectedRange!.end.toLocal().toString().split(' ')[0]}',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
               ),
             ),
           Padding(
@@ -207,7 +214,9 @@ class _InvoiceHistoryScreenState extends State<InvoiceHistoryScreen> {
             child: provider.isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : filteredInvoices.isEmpty
-                    ? const Center(child: Text("No invoices found."))
+                    ? Center(
+                        child: Text("No invoices found.",
+                            style: GoogleFonts.poppins()))
                     : ListView.separated(
                         padding: const EdgeInsets.all(12),
                         itemCount: filteredInvoices.length,
@@ -225,22 +234,22 @@ class _InvoiceHistoryScreenState extends State<InvoiceHistoryScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text('Invoice #${invoice.id}',
-                                      style: const TextStyle(
+                                      style: GoogleFonts.poppins(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold)),
                                   const SizedBox(height: 4),
                                   Text(
                                       'Customer: ${invoice.customerName ?? "N/A"}',
-                                      style: const TextStyle(fontSize: 14)),
+                                      style: GoogleFonts.poppins(fontSize: 14)),
                                   Text(
                                       'Date: ${invoice.date.toLocal().toString().split(' ')[0]}',
-                                      style: const TextStyle(fontSize: 14)),
+                                      style: GoogleFonts.poppins(fontSize: 14)),
                                   const SizedBox(height: 6),
                                   Align(
                                     alignment: Alignment.centerRight,
                                     child: Text(
                                         'Total: ₹${invoice.total.toStringAsFixed(2)}',
-                                        style: const TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
                                           color: Colors.green,
@@ -262,10 +271,10 @@ class _InvoiceHistoryScreenState extends State<InvoiceHistoryScreen> {
     return Column(
       children: [
         Text(value,
-            style: TextStyle(
+            style: GoogleFonts.poppins(
                 fontSize: 18, fontWeight: FontWeight.bold, color: color)),
         const SizedBox(height: 4),
-        Text(label, style: const TextStyle(fontSize: 14))
+        Text(label, style: GoogleFonts.poppins(fontSize: 14))
       ],
     );
   }
